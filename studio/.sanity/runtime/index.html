@@ -1,219 +1,695 @@
-<!DOCTYPE html><html lang="en">
-<!--
-This file is auto-generated from "sanity dev".
-Modifications to this file are automatically discarded.
--->
-<head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover"/><meta name="robots" content="noindex"/><meta name="referrer" content="same-origin"/><link rel="icon" href="/static/favicon.ico" sizes="any"/><link rel="icon" href="/static/favicon.svg" type="image/svg+xml"/><link rel="apple-touch-icon" href="/static/apple-touch-icon.png"/><link rel="manifest" href="/static/manifest.webmanifest"/><title>Sanity Studio</title><script>
-;(function () {
-  var _caughtErrors = []
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nova—A Clean, Modern Web Template</title>
+  <meta name="description" content="A fully styled, responsive, accessible website template with zero dependencies." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E✨%3C/text%3E%3C/svg%3E" />
+  <style>
+    /* -------------------------
+       Modern CSS Reset + Base
+       ------------------------- */
+    *,*::before,*::after{box-sizing:border-box}
+    :root{
+      /* Color system */
+      --bg: #0b0c10;
+      --panel: #111319;
+      --text: #e6e8ef;
+      --muted: #b7bdc9;
+      --brand: #7c6cff;
+      --brand-2:#2bd1ff;
+      --accent:#00db8b;
+      --danger:#ff5d5d;
+      --ring: color-mix(in oklab, var(--brand) 30%, white);
+      --shadow: 0 8px 24px hsl(240 10% 10% / .25);
+      --radius: 14px;
 
-  var errorChannel = (function () {
-    var subscribers = []
+      /* Typography */
+      --font-sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
+      --step--1: clamp(.83rem,.78rem + .23vw, .95rem);
+      --step-0: clamp(.95rem,.88rem + .35vw,1.05rem);
+      --step-1: clamp(1.05rem,.95rem + .75vw,1.25rem);
+      --step-2: clamp(1.25rem,1rem + 1.4vw,1.6rem);
+      --step-3: clamp(1.6rem,1.1rem + 2.5vw,2.2rem);
+      --step-4: clamp(2.2rem,1.5rem + 4vw,3rem);
+      --step-5: clamp(3rem,2rem + 6vw,4rem);
 
-    function publish(msg) {
-      for (var i = 0; i < subscribers.length; i += 1) {
-        subscribers[i](msg)
-      }
+      /* Layout */
+      --container: min(1120px, 92vw);
+      --gap: clamp(1rem,1.2vw,1.25rem);
+      --section-y: clamp(3rem,6vw,6rem);
+    }
+    @media (prefers-color-scheme: light) {
+      :root { --bg:#f7f7fb; --panel:#fff; --text:#0e1222; --muted:#56607a; --shadow:0 8px 24px hsl(220 30% 60% / .18) }
+    }
+    :root[data-theme="light"]{ color-scheme: light; }
+    :root[data-theme="dark"]{ color-scheme: dark; }
+
+    html, body { height:100% }
+    body{
+      margin:0;
+      font-family: var(--font-sans);
+      font-size: var(--step-0);
+      line-height: 1.6;
+      color: var(--text);
+      background:
+        radial-gradient(1200px 600px at 100% -10%, color-mix(in oklab, var(--brand) 20%, transparent) 0, transparent 60%),
+        radial-gradient(1200px 600px at -20% 10%, color-mix(in oklab, var(--brand-2) 20%, transparent) 0, transparent 60%),
+        var(--bg);
+      overflow-x: hidden;
+    }
+    img,svg,video{display:block;max-width:100%;height:auto}
+    a{color:inherit;text-decoration:none}
+    .container{width:var(--container);margin-inline:auto;padding-inline:clamp(.75rem,2.5vw,1rem)}
+    .section{padding-block: var(--section-y)}
+    .grid{display:grid;gap:var(--gap)}
+    .btn{
+      --h: 46px;
+      display:inline-grid; place-items:center; gap:.5ch;
+      grid-auto-flow: column;
+      padding-inline: 1.1rem;
+      height: var(--h);
+      border-radius: calc(var(--h)/2);
+      font-weight: 700;
+      border: 1px solid transparent;
+      background: linear-gradient(180deg, var(--brand), color-mix(in oklab, var(--brand) 75%, black));
+      color: #fff;
+      box-shadow: 0 10px 24px hsl(252 95% 70% / .35);
+      transition: transform .15s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease;
+      will-change: transform, box-shadow;
+    }
+    .btn svg{width:1.1em; height:1.1em}
+    .btn:hover{ transform: translateY(-1px); box-shadow: 0 14px 30px hsl(252 95% 60% / .4) }
+    .btn.alt{
+      background: transparent; color: var(--text);
+      border-color: color-mix(in oklab, var(--brand) 60%, transparent);
+      box-shadow: none;
+    }
+    .badge{
+      display:inline-block; padding:.3rem .6rem; border-radius: 999px;
+      background: color-mix(in oklab, var(--brand) 18%, transparent);
+      border: 1px solid color-mix(in oklab, var(--brand) 45%, transparent);
+      color: var(--brand-2); font-weight:700; letter-spacing:.02em;
+    }
+    .card{
+      background: var(--panel);
+      border: 1px solid color-mix(in oklab, var(--text) 8%, transparent);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .muted{ color: var(--muted) }
+    .sr-only{ position:absolute !important; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0 }
+    .pill{ border-radius: 999px }
+    .shadow-none{ box-shadow:none !important }
+
+    /* -------------------------
+       Header / Nav
+       ------------------------- */
+    header{
+      position:sticky; top:0; z-index:50; backdrop-filter:saturate(120%) blur(8px);
+      background: color-mix(in oklab, var(--bg) 75%, transparent);
+      border-bottom: 1px solid color-mix(in oklab, var(--text) 8%, transparent);
+    }
+    .nav{
+      display:flex; align-items:center; gap:1rem; height:64px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:.7rem; font-weight:800; letter-spacing:.02em
+    }
+    .logo{
+      width:34px; height:34px; border-radius:10px; display:grid; place-items:center; color:#fff;
+      background: conic-gradient(from 220deg, var(--brand), var(--brand-2));
+      box-shadow: 0 6px 18px hsl(252 95% 60% / .35);
+    }
+    nav ul{display:flex; gap:.8rem; list-style:none; padding:0; margin:0; align-items:center}
+    nav a{ padding:.5rem .8rem; border-radius:8px; font-weight:600; color: var(--muted) }
+    nav a[aria-current="page"], nav a:hover{ color: var(--text); background: color-mix(in oklab, var(--text) 8%, transparent) }
+    .spacer{ flex:1 }
+    .theme-toggle, .menu-toggle{
+      inline-size: 42px; block-size: 42px; display:grid; place-items:center; border-radius:10px;
+      border: 1px solid color-mix(in oklab, var(--text) 10%, transparent);
+      background: var(--panel); color: var(--text); cursor: pointer;
+    }
+    .menu-toggle{ display:none }
+
+    /* -------------------------
+       Hero
+       ------------------------- */
+    .hero{
+      display:grid; align-items:center; min-height: clamp(60vh, 72vh, 80vh);
+      position:relative; overflow:clip;
+    }
+    .hero h1{ font-size: var(--step-5); line-height: 1.05; letter-spacing:-.02em; margin:0 0 1rem }
+    .hero p { font-size: var(--step-1); color: var(--muted); margin:0 0 1.5rem }
+    .hero-cta{ display:flex; gap:.75rem; flex-wrap:wrap }
+    .hero-visual{
+      position:absolute; inset:auto -20vw -30% -20vw; z-index:-1; pointer-events:none; opacity:.6;
+      filter: drop-shadow(0 10px 40px hsl(252 95% 60% /.3));
+    }
+    .hero .metrics{
+      display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: var(--gap); margin-top:2rem;
+    }
+    .stat{ padding:1rem; text-align:center; border-radius:12px; background: color-mix(in oklab, var(--text) 6%, transparent) }
+    .stat b{ display:block; font-size: var(--step-3); letter-spacing:-.02em }
+    .stat span{ color:var(--muted) }
+
+    /* -------------------------
+       Sections
+       ------------------------- */
+    .features{ grid-template-columns: repeat(3, minmax(0,1fr)) }
+    .feature{ padding:1.1rem; display:grid; gap:.6rem }
+    .feature .icon{ inline-size:42px; block-size:42px; display:grid; place-items:center; border-radius:10px;
+      background: color-mix(in oklab, var(--brand) 22%, transparent); color: var(--brand-2)
     }
 
-    function subscribe(subscriber) {
-      subscribers.push(subscriber)
+    .portfolio{ grid-template-columns: repeat(12, 1fr) }
+    .shot{
+      aspect-ratio: 4/3; grid-column: span 4; overflow:hidden; position:relative;
+    }
+    .shot:nth-child(2){ grid-column: span 8; aspect-ratio: 16/9 }
+    .shot:nth-child(5){ grid-column: span 6 }
+    .shot:nth-child(6){ grid-column: span 6 }
+    .shot > div{
+      position:absolute; inset:0;
+      background:
+        radial-gradient(120% 100% at 100% 0%, color-mix(in oklab, var(--brand) 20%, transparent), transparent),
+        linear-gradient(135deg, color-mix(in oklab, var(--text) 6%, transparent), transparent 60%),
+        conic-gradient(from 180deg, color-mix(in oklab, var(--brand) 20%, transparent), color-mix(in oklab, var(--brand-2) 20%, transparent));
+      transition: transform .35s ease, filter .35s ease;
+      transform: scale(1.03);
+      filter: saturate(110%);
+    }
+    .shot:hover > div{ transform: scale(1.06); filter: saturate(130%) }
 
-      return function () {
-        var idx = subscribers.indexOf(subscriber)
+    .pricing{ grid-template-columns: repeat(3, minmax(0,1fr)); align-items:stretch }
+    .plan{ padding:1.25rem; display:grid; gap:.8rem; position:relative; overflow:hidden }
+    .plan.popular{ outline: 2px solid color-mix(in oklab, var(--brand) 45%, transparent) }
+    .price{ font-size: var(--step-3); font-weight:900 }
+    .plan ul{ padding:0; margin:0; list-style:none; display:grid; gap:.45rem }
+    .plan li{ display:grid; grid-auto-flow:column; grid-template-columns: 20px 1fr; align-items:start; gap:.5rem }
+    .plan li svg{ color: var(--accent) }
 
-        if (idx > -1) {
-          subscribers.splice(idx, 1)
+    .testimonials{ grid-template-columns: repeat(3, minmax(0,1fr)) }
+    .quote{ padding:1rem; display:grid; gap:.8rem }
+    .quote .who{ display:flex; align-items:center; gap:.7rem }
+    .avatar{ inline-size:40px; block-size:40px; border-radius:50%; background: linear-gradient(135deg, var(--brand), var(--brand-2)) }
+
+    .faq{ grid-template-columns: 1fr }
+    details{ background: var(--panel); border: 1px solid color-mix(in oklab, var(--text) 8%, transparent); border-radius:12px; padding:1rem }
+    details + details{ margin-top:.8rem }
+    summary{ cursor:pointer; font-weight:700; list-style:none }
+    summary::-webkit-details-marker{ display:none }
+
+    .blog{ grid-template-columns: repeat(3,minmax(0,1fr)) }
+    .post{ display:grid; gap:.6rem; padding:1rem }
+
+    .contact{ display:grid; grid-template-columns: 1.1fr .9fr; gap: var(--gap) }
+    form .field{ display:grid; gap:.35rem }
+    input, textarea, select{
+      width:100%; padding:.85rem .9rem; border-radius:10px; color:var(--text);
+      background: color-mix(in oklab, var(--text) 6%, transparent);
+      border:1px solid color-mix(in oklab, var(--text) 10%, transparent);
+      outline:none; transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+      font: inherit;
+    }
+    input:focus, textarea:focus, select:focus{
+      border-color: var(--ring);
+      box-shadow: 0 0 0 .25rem color-mix(in oklab, var(--brand) 18%, transparent);
+    }
+    .err{ color: var(--danger); font-size: var(--step--1) }
+
+    footer{ padding-block:2rem; color: var(--muted); border-top:1px solid color-mix(in oklab, var(--text) 8%, transparent) }
+
+    /* -------------------------
+       Utilities & Motion
+       ------------------------- */
+    .title{ font-size: var(--step-4); line-height:1.1; letter-spacing:-.02em; margin:0 0 .6rem }
+    .lead{ font-size: var(--step-1); color: var(--muted); margin:0 0 1.2rem }
+    .chips{ display:flex; gap:.5rem; flex-wrap:wrap }
+    .chip{ padding:.35rem .7rem; border:1px solid color-mix(in oklab, var(--text) 10%, transparent); border-radius:999px; color: var(--muted) }
+    .center{text-align:center}
+
+    [data-animate]{ opacity:0; transform: translateY(16px); transition: opacity .8s ease, transform .8s ease }
+    [data-animate].in{ opacity:1; transform: translateY(0) }
+
+    /* -------------------------
+       Responsive
+       ------------------------- */
+    @media (max-width: 960px){
+      .features{ grid-template-columns: 1fr 1fr }
+      .pricing{ grid-template-columns: 1fr; }
+      .testimonials{ grid-template-columns: 1fr 1fr }
+      .blog{ grid-template-columns: 1fr 1fr }
+      .contact{ grid-template-columns: 1fr }
+    }
+    @media (max-width: 760px){
+      .hero .metrics{ grid-template-columns: 1fr; }
+      nav ul{ position:fixed; inset:64px 0 auto 0; background: color-mix(in oklab, var(--bg) 92%, transparent);
+              flex-direction:column; padding:1rem; border-bottom:1px solid color-mix(in oklab, var(--text) 10%, transparent);
+              transform: translateY(-120%); transition: transform .25s ease; }
+      nav ul.open{ transform: translateY(0) }
+      .menu-toggle{ display:grid }
+      .features{ grid-template-columns: 1fr }
+      .portfolio{ grid-template-columns: repeat(6, 1fr) }
+      .shot{ grid-column: span 6 !important }
+      .testimonials, .blog{ grid-template-columns: 1fr }
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      *{ animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition: none !important }
+    }
+  </style>
+</head>
+<body>
+  <!-- ======================== Header ======================== -->
+  <header>
+    <div class="container nav" role="navigation" aria-label="Primary">
+      <a class="brand" href="#home" aria-label="Home">
+        <span class="logo" aria-hidden="true">★</span>
+        <span>Nova</span>
+      </a>
+      <nav class="spacer">
+        <ul id="navLinks">
+          <li><a href="#features">Features</a></li>
+          <li><a href="#portfolio">Work</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#testimonials">Love</a></li>
+          <li><a href="#blog">Blog</a></li>
+          <li><a href="#contact" class="pill" style="background:color-mix(in oklab, var(--brand) 18%, transparent);">Contact</a></li>
+        </ul>
+      </nav>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true">
+          <path d="M12 3a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0V4a1 1 0 0 1 1-1Zm0 15a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm8-5a1 1 0 1 1 0-2h1a1 1 0 1 1 0 2h-1ZM4 12a1 1 0 1 1 0-2H3a1 1 0 1 1 0 2h1Zm13.657-6.657a1 1 0 0 1 1.414 1.414L18.06 7.768a1 1 0 1 1-1.414-1.414l1.01-1.01ZM6.94 16.232a1 1 0 0 1 1.414 0l1.01 1.01a1 1 0 0 1-1.414 1.414l-1.01-1.01a1 1 0 0 1 0-1.414Zm11.12 1.192a1 1 0 0 1 0 1.414l-1.01 1.01A1 1 0 1 1 15.636 19l1.01-1.01a1 1 0 0 1 1.414 0ZM7.95 5.343 6.94 4.333A1 1 0 0 1 8.354 2.92l1.01 1.01A1 1 0 1 1 7.95 5.344Z"/>
+        </svg>
+      </button>
+      <button class="menu-toggle" id="menuToggle" aria-controls="navLinks" aria-expanded="false" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M3 6h18v2H3V6Zm0 5h18v2H3v-2Zm0 5h18v2H3v-2Z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- ======================== Hero ======================== -->
+  <main id="home" class="hero section container">
+    <svg class="hero-visual" viewBox="0 0 1440 320" preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="var(--brand)" />
+          <stop offset="100%" stop-color="var(--brand-2)" />
+        </linearGradient>
+      </defs>
+      <path d="M0 64l60 16c60 16 180 48 300 58.7C480 149 600 139 720 154.7c120 16 240 58.3 360 53.3 120-5 240-59 360-96v208H0Z" fill="url(#g)" opacity=".35"/>
+    </svg>
+    <div data-animate>
+      <span class="badge">New: v2 Components</span>
+      <h1>Build beautiful, fast websites—<span style="background:linear-gradient(90deg,var(--brand),var(--brand-2));-webkit-background-clip:text;background-clip:text;color:transparent">with zero dependencies</span>.</h1>
+      <p class="lead">Nova ships as a single HTML file with clean semantics, responsive layout, and delightful micro-interactions. Copy → paste → deploy. ✔️</p>
+      <div class="hero-cta">
+        <a href="#pricing" class="btn">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3 12a9 9 0 1 1 18 0 9 9 0 0 1-18 0Zm9-5a1 1 0 0 0-1 1v3H8a1 1 0 1 0 0 2h3v3a1 1 0 1 0 2 0v-3h3a1 1 0 1 0 0-2h-3V8a1 1 0 0 0-1-1Z"/></svg>
+          Get Started
+        </a>
+        <a href="#portfolio" class="btn alt">See Examples</a>
+      </div>
+      <div class="metrics">
+        <div class="stat"><b>120ms</b><span>Largest Contentful Paint</span></div>
+        <div class="stat"><b>100/100</b><span>Lighthouse score</span></div>
+        <div class="stat"><b>0 deps</b><span>Pure HTML + CSS + JS</span></div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ======================== Features ======================== -->
+  <section id="features" class="section">
+    <div class="container">
+      <header class="center" data-animate>
+        <h2 class="title">Everything you need to ship fast</h2>
+        <p class="lead">Modular cards, fluid type, grid utilities, and accessible components—ready to remix.</p>
+      </header>
+      <div class="grid features" style="margin-top:1.2rem">
+        <article class="card feature" data-animate>
+          <span class="icon" aria-hidden="true">⚡</span>
+          <h3>Performance-first</h3>
+          <p class="muted">Inline critical CSS, compressed SVGs, and zero layout shift by default.</p>
+          <div class="chips">
+            <span class="chip">CLS 0.00</span><span class="chip">No jQuery</span><span class="chip">GPU anims</span>
+          </div>
+        </article>
+        <article class="card feature" data-animate>
+          <span class="icon" aria-hidden="true">🧩</span>
+          <h3>Composable</h3>
+          <p class="muted">Drop-in sections, utilities, and tokens. Tweak one variable, theme the whole site.</p>
+          <div class="chips"><span class="chip">CSS Vars</span><span class="chip">Design Tokens</span></div>
+        </article>
+        <article class="card feature" data-animate>
+          <span class="icon" aria-hidden="true">🛡️</span>
+          <h3>Accessible</h3>
+          <p class="muted">Semantic HTML, focus rings, reduced motion support, and clear contrast.</p>
+          <div class="chips"><span class="chip">WCAG AA</span><span class="chip">ARIA</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== Portfolio ======================== -->
+  <section id="portfolio" class="section">
+    <div class="container">
+      <header class="center" data-animate>
+        <h2 class="title">Recent work</h2>
+        <p class="lead">A few playful compositions to spark ideas.</p>
+      </header>
+      <div class="grid portfolio" style="margin-top:1rem">
+        <!-- gradient placeholders look classy while staying asset-free -->
+        <a class="card shot" href="#" aria-label="Project Alpha" data-animate><div></div></a>
+        <a class="card shot" href="#" aria-label="Project Beta" data-animate><div></div></a>
+        <a class="card shot" href="#" aria-label="Project Gamma" data-animate><div></div></a>
+        <a class="card shot" href="#" aria-label="Project Delta" data-animate><div></div></a>
+        <a class="card shot" href="#" aria-label="Project Epsilon" data-animate><div></div></a>
+        <a class="card shot" href="#" aria-label="Project Zeta" data-animate><div></div></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== Pricing ======================== -->
+  <section id="pricing" class="section">
+    <div class="container">
+      <header class="center" data-animate>
+        <h2 class="title">Simple, fair pricing</h2>
+        <p class="lead">Switch between monthly and yearly. Cancel anytime. No hidden fees. ❗</p>
+        <div style="display:inline-flex; gap:.5rem; align-items:center; background:var(--panel); border-radius:999px; padding:.25rem; border:1px solid color-mix(in oklab, var(--text) 8%, transparent)">
+          <button class="pill" id="billMonthly" aria-pressed="true" style="padding:.45rem .8rem; font-weight:700">Monthly</button>
+          <button class="pill" id="billYearly" aria-pressed="false" style="padding:.45rem .8rem; font-weight:700">Yearly <span class="badge" style="margin-left:.35rem">Save 20%</span></button>
+        </div>
+      </header>
+      <div class="grid pricing" style="margin-top:1rem">
+        <article class="card plan" data-plan="starter" data-animate>
+          <h3>Starter</h3>
+          <p class="muted">Perfect for quick experiments and prototypes.</p>
+          <div class="price" data-price data-m="$9" data-y="$86">$9</div>
+          <ul>
+            <li>
+              <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M9 16.2 4.8 12 3.4 13.4 9 19l12-12-1.4-1.4Z"/></svg>
+              <span>1 project, unlimited pages</span>
+            </li>
+            <li><svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M9 16.2 4.8 12 3.4 13.4 9 19l12-12-1.4-1.4Z"/></svg><span>Email support</span></li>
+          </ul>
+          <a href="#contact" class="btn">Choose Starter</a>
+        </article>
+
+        <article class="card plan popular" data-plan="pro" data-animate>
+          <span class="badge" style="position:absolute; top:12px; right:12px">Most Popular</span>
+          <h3>Pro</h3>
+          <p class="muted">For growing teams who want more power.</p>
+          <div class="price" data-price data-m="$29" data-y="$278">$29</div>
+          <ul>
+            <li><svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M9 16.2 4.8 12 3.4 13.4 9 19l12-12-1.4-1.4Z"/></svg><span>Unlimited projects</span></li>
+            <li><svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M9 16.2 4.8 12 3.4 13.4 9 19l12-12-1.4-1.4Z"/></svg><span>Team roles & SSO</span></li>
+            <li><svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M9 16.2 4.8 12 3.4 13.4 9 19l12-12-1.4-1.4Z"/></svg><span>Priority support</span></li>
+          </ul>
+          <a href="#contact" class="btn">Choose Pro</a>
+        </article>
+
+        <article class="card plan" data-plan="enterprise" data-animate>
+          <h3>Enterprise</h3>
+          <p class="muted">Security, custom SLAs, and white-glove onboarding.</p>
+          <div class="price" data-price data-m="Custom" data-y="Custom">Custom</div>
+          <ul>
+            <li><svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M9 16.2 4.8 12 3.4 13.4 9 19l12-12-1.4-1.4Z"/></svg><span>SOC 2, SSO, SCIM</span></li>
+            <li><svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M9 16.2 4.8 12 3.4 13.4 9 19l12-12-1.4-1.4Z"/></svg><span>Dedicated manager</span></li>
+            <li><svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M9 16.2 4.8 12 3.4 13.4 9 19l12-12-1.4-1.4Z"/></svg><span>Custom integrations</span></li>
+          </ul>
+          <a href="#contact" class="btn">Contact Sales</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== Testimonials ======================== -->
+  <section id="testimonials" class="section">
+    <div class="container">
+      <header class="center" data-animate>
+        <h2 class="title">Loved by designers & devs</h2>
+        <p class="lead">Here’s what people say after shipping with Nova.</p>
+      </header>
+      <div class="grid testimonials" style="margin-top:1rem">
+        <figure class="card quote" data-animate>
+          <div class="who">
+            <div class="avatar" aria-hidden="true"></div>
+            <figcaption><b>Jess K.</b><br><span class="muted">Product Designer</span></figcaption>
+          </div>
+          <blockquote>“The best starter I’ve used—clean, elegant, and blazing fast.”</blockquote>
+        </figure>
+        <figure class="card quote" data-animate>
+          <div class="who">
+            <div class="avatar" aria-hidden="true"></div>
+            <figcaption><b>Marco A.</b><br><span class="muted">Frontend Engineer</span></figcaption>
+          </div>
+          <blockquote>“Saved me days on my landing page. The utilities are 💡 smart.”</blockquote>
+        </figure>
+        <figure class="card quote" data-animate>
+          <div class="who">
+            <div class="avatar" aria-hidden="true"></div>
+            <figcaption><b>Ada C.</b><br><span class="muted">Founder</span></figcaption>
+          </div>
+          <blockquote>“Looks bespoke without the headache. 10/10 would ship again.”</blockquote>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== FAQ ======================== -->
+  <section class="section">
+    <div class="container">
+      <header class="center" data-animate>
+        <h2 class="title">FAQ</h2>
+        <p class="lead">Short, human answers to common questions.</p>
+      </header>
+      <div class="grid faq" style="margin-top:1rem">
+        <details data-animate>
+          <summary>Do I need any frameworks?</summary>
+          <p class="muted">Nope. Nova is pure HTML + CSS + JS. Copy the file and you’re rolling. 🤔</p>
+        </details>
+        <details data-animate>
+          <summary>Can I use this commercially?</summary>
+          <p class="muted">Yes. Customize freely. A tiny credit is appreciated but not required.</p>
+        </details>
+        <details data-animate>
+          <summary>Does it support dark mode?</summary>
+          <p class="muted">Yep—auto respects system preference and includes a manual toggle that persists.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== Blog ======================== -->
+  <section id="blog" class="section">
+    <div class="container">
+      <header class="center" data-animate>
+        <h2 class="title">Latest posts</h2>
+        <p class="lead">Thoughts on design systems, performance, and DX.</p>
+      </header>
+      <div class="grid blog" style="margin-top:1rem">
+        <article class="card post" data-animate>
+          <span class="badge">Performance</span>
+          <h3>Ship faster with design tokens</h3>
+          <p class="muted">How a small set of CSS variables can scale your entire UI without bloat.</p>
+          <a class="btn alt pill" href="#">Read</a>
+        </article>
+        <article class="card post" data-animate>
+          <span class="badge">CSS</span>
+          <h3>Fluid type with clamp()</h3>
+          <p class="muted">Responsive typography without media queries—clean, predictable, elegant.</p>
+          <a class="btn alt pill" href="#">Read</a>
+        </article>
+        <article class="card post" data-animate>
+          <span class="badge">Accessibility</span>
+          <h3>Focus states that feel right</h3>
+          <p class="muted">Improve usability for everyone with tasteful rings and motion options.</p>
+          <a class="btn alt pill" href="#">Read</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== Contact ======================== -->
+  <section id="contact" class="section">
+    <div class="container contact">
+      <div class="card" style="padding:1.25rem" data-animate>
+        <h2 class="title" style="margin:0 0 .25rem">Tell us about your project</h2>
+        <p class="muted">We typically respond within 1 business day.</p>
+        <form id="contactForm" novalidate>
+          <div class="grid" style="grid-template-columns:1fr 1fr; gap:var(--gap)">
+            <div class="field">
+              <label for="name">Name</label>
+              <input id="name" name="name" autocomplete="name" required />
+              <span class="err" id="errName" role="alert"></span>
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" autocomplete="email" required />
+              <span class="err" id="errEmail" role="alert"></span>
+            </div>
+          </div>
+          <div class="field" style="margin-top:.8rem">
+            <label for="budget">Budget</label>
+            <select id="budget" name="budget" required>
+              <option value="">Select…</option>
+              <option>Under $2,000</option>
+              <option>$2,000 – $10,000</option>
+              <option>$10,000+</option>
+            </select>
+            <span class="err" id="errBudget" role="alert"></span>
+          </div>
+          <div class="field" style="margin-top:.8rem">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" placeholder="What are you building?" required></textarea>
+            <span class="err" id="errMessage" role="alert"></span>
+          </div>
+          <div style="display:flex; gap:.6rem; align-items:center; margin-top:1rem">
+            <button class="btn" type="submit">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M2 21 23 12 2 3v7l15 2-15 2v7Z"/></svg>
+              Send
+            </button>
+            <span id="formStatus" class="muted" role="status" aria-live="polite"></span>
+          </div>
+        </form>
+      </div>
+
+      <aside class="card" style="padding:1.25rem" data-animate>
+        <h3>Contact</h3>
+        <p class="muted">We’re a distributed team across timezones.</p>
+        <ul style="list-style:none; padding:0; margin:0; display:grid; gap:.4rem">
+          <li>📍 Remote-first</li>
+          <li>✉️ hello@nova.example</li>
+          <li>🕓 Mon–Fri, 9–5</li>
+        </ul>
+        <hr style="border:none;border-top:1px solid color-mix(in oklab, var(--text) 8%, transparent); margin:1rem 0" />
+        <h3>Tech we ♥</h3>
+        <div class="chips">
+          <span class="chip">HTML</span>
+          <span class="chip">CSS</span>
+          <span class="chip">JavaScript</span>
+          <span class="chip">SVG</span>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ======================== Footer ======================== -->
+  <footer class="container">
+    <div style="display:flex; gap:1rem; align-items:center; justify-content:space-between; flex-wrap:wrap">
+      <div class="brand"><span class="logo" aria-hidden="true">★</span><span>Nova</span></div>
+      <small>© <span id="year"></span> Nova. All rights reserved.</small>
+      <div style="display:flex; gap:.5rem">
+        <a href="#" class="chip">Privacy</a>
+        <a href="#" class="chip">Terms</a>
+        <a href="#" class="chip">Changelog</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ======================== Scripts ======================== -->
+  <script>
+    // Theme: respects system preference + manual toggle with persistence
+    (function themeInit(){
+      const root = document.documentElement;
+      const saved = localStorage.getItem('theme');
+      if (saved) root.dataset.theme = saved;
+      else root.dataset.theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    })();
+
+    const $ = (sel, ctx=document) => ctx.querySelector(sel);
+    const $$ = (sel, ctx=document) => Array.from(ctx.querySelectorAll(sel));
+
+    // Nav: mobile menu toggle + close on navigation
+    const menuBtn = $('#menuToggle');
+    const nav = $('#navLinks');
+    menuBtn?.addEventListener('click', () => {
+      const open = nav.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', String(open));
+    });
+    nav?.addEventListener('click', (e) => {
+      if (e.target.closest('a')) nav.classList.remove('open');
+    });
+
+    // Theme toggle
+    $('#themeToggle')?.addEventListener('click', () => {
+      const root = document.documentElement;
+      root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+      localStorage.setItem('theme', root.dataset.theme);
+    });
+
+    // Scroll reveal
+    const io = new IntersectionObserver((entries) => {
+      for (const ent of entries) {
+        if (ent.isIntersecting) {
+          ent.target.classList.add('in');
+          io.unobserve(ent.target);
         }
       }
+    }, { threshold: 0.12 });
+    $$('[data-animate]').forEach(el => io.observe(el));
+
+    // Scroll spy for nav links
+    const sections = ['#features','#portfolio','#pricing','#testimonials','#blog','#contact'].map(id => $(id));
+    const navLinks = $$('#navLinks a');
+    const spy = new IntersectionObserver((entries) => {
+      entries.forEach(ent => {
+        if (ent.isIntersecting) {
+          const id = '#' + ent.target.id;
+          navLinks.forEach(a => a.removeAttribute('aria-current'));
+          const active = $(`#navLinks a[href="${id}"]`);
+          active?.setAttribute('aria-current','page');
+        }
+      });
+    }, { threshold: 0.5 });
+    sections.forEach(sec => sec && spy.observe(sec));
+
+    // Pricing toggle
+    const btnM = $('#billMonthly'), btnY = $('#billYearly');
+    function setBilling(mode){
+      btnM.setAttribute('aria-pressed', String(mode === 'm'));
+      btnY.setAttribute('aria-pressed', String(mode === 'y'));
+      $$('[data-price]').forEach(el => {
+        el.textContent = el.dataset[ mode === 'm' ? 'm' : 'y' ];
+      });
+      localStorage.setItem('billing', mode);
     }
+    const savedBilling = localStorage.getItem('billing') || 'm';
+    setBilling(savedBilling);
+    btnM.addEventListener('click', () => setBilling('m'));
+    btnY.addEventListener('click', () => setBilling('y'));
 
-    return {publish, subscribe, subscribers}
-  })()
+    // Contact form validation (client-side)
+    const form = $('#contactForm');
+    const showErr = (id, msg='') => { const el = $(id); el.textContent = msg; el.style.display = msg ? 'block' : 'none'; };
+    function validateEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
 
-  // NOTE: Store the error channel instance in the global scope so that the Studio application can
-  // access it and subscribe to errors.
-  window.__sanityErrorChannel = {
-    subscribe: errorChannel.subscribe,
-  }
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form).entries());
+      let ok = true;
 
-  function _nextTick(callback) {
-    setTimeout(callback, 0)
-  }
+      if (!data.name?.trim()){ showErr('#errName','Please enter your name'); ok = false } else showErr('#errName');
+      if (!validateEmail(data.email)){ showErr('#errEmail','Please enter a valid email'); ok = false } else showErr('#errEmail');
+      if (!data.budget){ showErr('#errBudget','Please select a budget'); ok = false } else showErr('#errBudget');
+      if (!data.message?.trim()){ showErr('#errMessage','Tell us a bit about your project'); ok = false } else showErr('#errMessage');
 
-  function _handleError(error, params) {
-    _nextTick(function () {
-      // - If there are error channel subscribers, then we notify them (no console error).
-      // - If there are no subscribers, then we log the error to the console and render the error overlay.
-      if (errorChannel.subscribers.length) {
-        errorChannel.publish({error, params})
-      } else {
-        console.error(error)
+      const status = $('#formStatus');
+      if (!ok){ status.textContent = 'Please fix the highlighted fields.'; status.style.color = 'var(--danger)'; return; }
 
-        _renderErrorOverlay(error, params)
-      }
-    })
-  }
+      // Simulate submit
+      status.textContent = 'Sending…';
+      status.style.color = '';
+      setTimeout(() => {
+        status.textContent = 'Thanks! We’ll be in touch shortly.';
+        form.reset();
+      }, 600);
+    });
 
-  var ERROR_BOX_STYLE = [
-    'background: #fff',
-    'border-radius: 6px',
-    'box-sizing: border-box',
-    'color: #121923',
-    'flex: 1',
-    "font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue','Liberation Sans',Helvetica,Arial,system-ui,sans-serif",
-    'font-size: 16px',
-    'line-height: 21px',
-    'margin: 0 auto',
-    'max-width: 960px',
-    'overflow: auto',
-    'padding: 20px',
-    'width: 100%',
-  ].join(';')
-
-  var ERROR_CODE_STYLE = [
-    'color: #972E2A',
-    "font-family: -apple-system-ui-monospace, 'SF Mono', Menlo, Monaco, Consolas, monospace",
-    'font-size: 13px',
-    'line-height: 17px',
-    'margin: 0',
-  ].join(';')
-
-  function _renderErrorOverlay(error, params) {
-    var errorElement = document.querySelector('#__sanityError') || document.createElement('div')
-    var colno = params.event.colno
-    var lineno = params.event.lineno
-    var filename = params.event.filename
-
-    errorElement.id = '__sanityError'
-    errorElement.innerHTML = [
-      '<div style="' + ERROR_BOX_STYLE + '">',
-      '<div style="font-weight: 700;">Uncaught error: ' + error.message + '</div>',
-      '<div style="color: #515E72; font-size: 13px; line-height: 17px; margin: 10px 0;">' +
-        filename +
-        ':' +
-        lineno +
-        ':' +
-        colno +
-        '</div>',
-      '<pre style="' + ERROR_CODE_STYLE + '">' + error.stack + '</pre>',
-      '</div>',
-    ].join('')
-
-    errorElement.style.position = 'fixed'
-    errorElement.style.zIndex = 1000000
-    errorElement.style.top = 0
-    errorElement.style.left = 0
-    errorElement.style.right = 0
-    errorElement.style.bottom = 0
-    errorElement.style.padding = '20px'
-    errorElement.style.background = 'rgba(16,17,18,0.66)'
-    errorElement.style.display = 'flex'
-    errorElement.style.alignItems = 'center'
-    errorElement.style.justifyContent = 'center'
-
-    document.body.appendChild(errorElement)
-  }
-
-  // NOTE:
-  // Yes – we're attaching 2 error listeners below 👀
-  // This is because React makes the same error throw twice (in development mode).
-  // See: https://github.com/facebook/react/issues/10384
-
-  // Error listener #1
-  window.onerror = function (event, source, lineno, colno, error) {
-    _nextTick(function () {
-      if (_caughtErrors.indexOf(error) !== -1) return
-
-      _caughtErrors.push(error)
-
-      _handleError(error, {
-        event,
-        lineno,
-        colno,
-        source,
-      })
-
-      _nextTick(function () {
-        var idx = _caughtErrors.indexOf(error)
-
-        if (idx > -1) _caughtErrors.splice(idx, 1)
-      })
-    })
-
-    // IMPORTANT: this callback must return `true` to prevent the error from being rendered in
-    // the browser’s console.
-    return true
-  }
-
-  // Error listener #2
-  window.addEventListener('error', function (event) {
-    if (_caughtErrors.indexOf(event.error) !== -1) return true
-
-    _caughtErrors.push(event.error)
-
-    _handleError(event.error, {
-      event,
-      lineno: event.lineno,
-      colno: event.colno,
-    })
-
-    _nextTick(function () {
-      _nextTick(function () {
-        var idx = _caughtErrors.indexOf(event.error)
-
-        if (idx > -1) _caughtErrors.splice(idx, 1)
-      })
-    })
-
-    return true
-  })
-})()
-</script><style>
-  @font-face {
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 100 900;
-    font-display: swap;
-    src: url('https://studio-static.sanity.io/InterVariable.ttf');
-    font-named-instance: 'Regular';
-  }
-  @font-face {
-    font-family: 'Inter';
-    font-style: italic;
-    font-weight: 100 900;
-    font-display: swap;
-    src: url('https://studio-static.sanity.io/InterVariable-Italic.ttf');
-    font-named-instance: 'Italic';
-  }
-  html {
-    background-color: #f1f3f6;
-  }
-  html,
-  body,
-  #sanity {
-    height: 100%;
-  }
-  body {
-    margin: 0;
-    -webkit-font-smoothing: antialiased;
-  }
-</style></head><body><div id="sanity"></div><script type="module" src="/.sanity/runtime/app.js"></script><noscript><div class="sanity-app-no-js__root"><div class="sanity-app-no-js__content"><style type="text/css">
-.sanity-app-no-js__root {
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
-  background: #fff;
-}
-
-.sanity-app-no-js__content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  font-family: helvetica, arial, sans-serif;
-}
-</style><h1>JavaScript disabled</h1><p>Please <a href="https://www.enable-javascript.com/">enable JavaScript</a> in your browser and reload the page to proceed.</p></div></div></noscript></body></html>
+    // Footer year
+    $('#year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
